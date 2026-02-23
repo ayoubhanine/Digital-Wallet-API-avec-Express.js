@@ -10,7 +10,7 @@ app.use(express.json());
 
 // Routes
 app.use("/users", userRoutes);
-// app.use("/wallets", walletRoutes);
+app.use("/wallets", walletRoutes);
 // Route par défaut si non trouvée
 app.use((req, res) => {
   res.status(404).json({ message: "Route not found" });
