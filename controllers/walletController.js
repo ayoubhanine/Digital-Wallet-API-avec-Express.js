@@ -49,11 +49,42 @@ function deleteWallet(req,res){
    const deletedWallet=wallets.splice(walletIndex,1);
    res.status(200).json({message:"wallet deleted",wallet:deletedWallet[0]})
 }
+function deposit(req,res){
+   const id=parseInt(req.params.id);
+   const {amount}=req.body
+   const wallet=wallets.find(w=>w.id===id)
+   if(!wallet){
+      return res.status(404).json({message:"wallet not found"})
+   }
+   if(!amount || amount<=0){
+      return res.status(400).json({message:"sold doit etre positive"})
+   }
+   wallet.sold=wallet.sold+amount;
+   res.status(200).json({message:"depot est faite avec succes",wallet})
+}
+function retirer(req,res){
+   const id=parseInt(req.params.id);
+   const {amount}=req.body;
+   const wallet=wallets.find(w=>w.id===id);
+   if(!wallet){
+      return res.status(404).json({message:"wallet not found"})
+   }
+   if (!amount || amount <= 0) {
+    return res.status(400).json({ message: "Amount must be strictly positive" });
+  }
+  if(wallet.sold<amount){
+   return res.status(400).json({message:"insuffisant balance"})
+  }
+  wallet.sold=wallet.sold-amount
+  res.status(200).json({message:"retrait avec succes",wallet})
+}
 
 module.exports = {
   getWallets,
   createWallet,
   getWalletById,
   updateWallet,
-  deleteWallet
+  deleteWallet,
+  deposit,
+  retirer
 };
