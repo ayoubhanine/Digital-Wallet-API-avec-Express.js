@@ -18,9 +18,42 @@ function createWallet(req,res){
   wallets.push(newWallet);
    res.status(201).json(newWallet);
 }
+function getWalletById(req,res){
+      const id=parseInt(req.params.id);
+      const wallet=wallets.find(w=>w.id===id)
+      if(!wallet){
+         return res.status(400).json({message:"wallet not found"})
+      }
+      res.status(200).json(wallet);
 
+}
+function updateWallet(req,res){
+   const id=parseInt(req.params.id);
+   const {name}=req.body;
+   const walletIndex=wallets.findIndex(w=>w.id===id)
+   if(walletIndex===-1){
+      return res.status(404).json({message:"wallet not found"})
+   }
+if(name)
+   wallets[walletIndex].name=name;
+   res.status(200).json(wallets[walletIndex])
+
+
+}
+function deleteWallet(req,res){
+   const id=parseInt(req.params.id)
+   const walletIndex=wallets.findIndex(w=>w.id===id);
+   if(walletIndex===-1){
+      return res.status(404).json({message:"wallet not found"})
+   }
+   const deletedWallet=wallets.splice(walletIndex,1);
+   res.status(200).json({message:"wallet deleted",wallet:deletedWallet[0]})
+}
 
 module.exports = {
   getWallets,
-  createWallet
+  createWallet,
+  getWalletById,
+  updateWallet,
+  deleteWallet
 };
