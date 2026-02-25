@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+ const { validateWallet, validateAmount, validateId } = require("../middlewares/validate");
 const {
   getWallets,
   createWallet,
@@ -13,11 +14,13 @@ const {
 
 // Routes CRUD complet
 router.get("/", getWallets);           
-router.post("/", createWallet);        
-router.get("/:id", getWalletById);     
-router.put("/:id", updateWallet);      
-router.delete("/:id", deleteWallet);   
+router.post("/",validateWallet, createWallet);        
+router.get("/:id", validateId,getWalletById);     
+router.put("/:id",validateId, updateWallet);      
+router.delete("/:id",validateId, deleteWallet);   
 
-router.post("/:id/deposit",deposit);
-router.post("/:id/retirer",retirer)
+router.post("/:id/deposit",validateId, validateAmount,deposit);
+router.post("/:id/retirer",validateId, validateAmount,retirer)
 module.exports = router;
+
+

@@ -4,9 +4,7 @@ function getWallets(req,res){
 }
 function createWallet(req,res){
     const {user_id,name}=req.body;
-    if(!user_id || !name){
-       return res.status(400).json({message:"user_id et name sont obligatoires "})
-    }
+   
     const userExists=users.find(user=>user.id===parseInt(user_id));
     if(!userExists){
        return res.status(400).json({message:"user not found"})
@@ -55,9 +53,6 @@ function deposit(req,res){
    const wallet=wallets.find(w=>w.id===id)
    if(!wallet){
       return res.status(404).json({message:"wallet not found"})
-   }
-   if(!amount || amount<=0){
-      return res.status(400).json({message:"sold doit etre positive"})
    }
    wallet.sold=wallet.sold+amount;
    res.status(200).json({message:"depot est faite avec succes",wallet})

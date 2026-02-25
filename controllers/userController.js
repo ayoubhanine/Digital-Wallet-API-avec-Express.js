@@ -2,9 +2,7 @@ const { users } = require("../data/dataStore");
 
 function createUser(req, res) {
   const { name, email, phone } = req.body;
-  if (!name || !email || !phone) {
-    return res.status(400).json({ message: "All fields are required" });
-  }
+  
 const maxId = users.length > 0 
   ? Math.max(...users.map(user => user.id)) 
   : 0;
