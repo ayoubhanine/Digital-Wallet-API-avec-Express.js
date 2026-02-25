@@ -5,11 +5,9 @@ Ce projet est une API **Node.js** utilisant **Express** pour gérer des utilisat
 
 ---
 
-## 1. Structure de projet 
+## 1. Structure de projet
 
-## Structure du projet
-
-Digital Wallet API AVEC EXPRESS
+Digital Wallet API
 ├─ controllers/
 │  ├─ userController.js
 │  └─ walletController.js
@@ -44,4 +42,3 @@ Digital Wallet API AVEC EXPRESS
   - Middleware JSON pour lire les requêtes
 
 ---
-
