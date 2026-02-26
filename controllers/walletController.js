@@ -7,7 +7,7 @@ function createWallet(req,res){
    
     const userExists=users.find(user=>user.id===parseInt(user_id));
     if(!userExists){
-       return res.status(400).json({message:"user not found"})
+       return res.status(404).json({message:"user not found"})
     }
     const maxId = wallets.length > 0 
   ? Math.max(...wallets.map(wallet =>wallet.id)) 
@@ -20,7 +20,7 @@ function getWalletById(req,res){
       const id=parseInt(req.params.id);
       const wallet=wallets.find(w=>w.id===id)
       if(!wallet){
-         return res.status(400).json({message:"wallet not found"})
+         return res.status(404).json({message:"wallet not found"})
       }
       res.status(200).json(wallet);
 
