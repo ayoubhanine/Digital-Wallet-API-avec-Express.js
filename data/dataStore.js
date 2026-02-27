@@ -1,4 +1,4 @@
-let users = [];
-let wallets = [];
+// let users = [];
+// let wallets = [];
 
-module.exports = { users, wallets };
+// module.exports = { users, wallets };
