@@ -2,7 +2,29 @@
 const { readData, writeData } = require("../utils/fileUtils");
 function getWallets(req,res){
    const wallets=readData("wallets.json");
-    res.status(200).json(wallets);
+     // Pagination
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 2;
+    const startIndex = (page - 1) * limit;
+    const endIndex = page * limit;
+
+    // Filtrage par user_id si fourni
+    let filteredWallets = wallets;
+    if (req.query.user_id) {
+      const userId = parseInt(req.query.user_id);
+      filteredWallets = wallets.filter(w => w.user_id === userId);
+    }
+
+    //  Slice pour pagination
+    const result = filteredWallets.slice(startIndex, endIndex);
+
+    res.status(200).json({
+      page,
+      limit,
+      total: filteredWallets.length,
+      totalPages: Math.ceil(filteredWallets.length / limit),
+      data: result
+    });
 }
 function createWallet(req,res){
    const wallets=readData("wallets.json")

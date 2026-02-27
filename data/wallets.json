@@ -4,5 +4,23 @@
     "user_id": 1,
     "name": "wallet1",
     "sold": 85
+  },
+  {
+    "id": 2,
+    "user_id": 1,
+    "name": "ayouub",
+    "sold": 0
+  },
+  {
+    "id": 3,
+    "user_id": 1,
+    "name": "ayouub",
+    "sold": 0
+  },
+  {
+    "id": 4,
+    "user_id": 1,
+    "name": "wallet4",
+    "sold": 0
   }
 ]
